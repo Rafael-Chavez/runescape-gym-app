@@ -5,6 +5,20 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { FitnessAssessment as FitnessAssessmentType } from '../types/user';
 
+// Form data interface that matches the yup schema exactly
+interface FitnessAssessmentFormData {
+  currentWeight: number;
+  targetWeight?: number;
+  height: number;
+  age: number;
+  activityLevel: string;
+  experienceLevel: string;
+  healthConditions: string[];
+  availableEquipment: string[];
+  preferredWorkoutTimes: string[];
+  workoutDuration: number;
+}
+
 interface FitnessAssessmentProps {
   onComplete: (assessment: FitnessAssessmentType) => void;
   onBack?: () => void;
@@ -168,7 +182,7 @@ const schema = yup.object().shape({
 });
 
 const FitnessAssessment: React.FC<FitnessAssessmentProps> = ({ onComplete, onBack }) => {
-  const { control, handleSubmit, formState: { errors }, watch, setValue } = useForm<FitnessAssessmentType>({
+  const { control, handleSubmit, formState: { errors }, watch, setValue } = useForm<FitnessAssessmentFormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       healthConditions: [],
@@ -204,7 +218,7 @@ const FitnessAssessment: React.FC<FitnessAssessmentProps> = ({ onComplete, onBac
     value: string, 
     selectedArray: string[], 
     setSelectedArray: (arr: string[]) => void,
-    fieldName: keyof FitnessAssessmentType
+    fieldName: keyof FitnessAssessmentFormData
   ) => {
     const newArray = selectedArray.includes(value)
       ? selectedArray.filter(item => item !== value)
@@ -214,9 +228,11 @@ const FitnessAssessment: React.FC<FitnessAssessmentProps> = ({ onComplete, onBac
     setValue(fieldName, newArray as any);
   };
 
-  const onSubmit = (data: FitnessAssessmentType) => {
-    const assessmentData = {
+  const onSubmit = (data: FitnessAssessmentFormData) => {
+    const assessmentData: FitnessAssessmentType = {
       ...data,
+      activityLevel: data.activityLevel as FitnessAssessmentType['activityLevel'],
+      experienceLevel: data.experienceLevel as FitnessAssessmentType['experienceLevel'],
       healthConditions: selectedHealthConditions,
       availableEquipment: selectedEquipment,
       preferredWorkoutTimes: selectedWorkoutTimes
