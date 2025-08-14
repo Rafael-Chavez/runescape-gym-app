@@ -1,23 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { FitnessAssessment as FitnessAssessmentType } from '../types/user';
-
-// Form data interface that matches the yup schema exactly
-interface FitnessAssessmentFormData {
-  currentWeight: number;
-  targetWeight?: number;
-  height: number;
-  age: number;
-  activityLevel: string;
-  experienceLevel: string;
-  healthConditions: string[];
-  availableEquipment: string[];
-  preferredWorkoutTimes: string[];
-  workoutDuration: number;
-}
 
 interface FitnessAssessmentProps {
   onComplete: (assessment: FitnessAssessmentType) => void;
@@ -168,23 +152,14 @@ const ActionButton = styled.button`
   }
 `;
 
-const schema = yup.object().shape({
-  currentWeight: yup.number().required('Current weight is required').positive('Weight must be positive'),
-  targetWeight: yup.number().positive('Target weight must be positive').optional(),
-  height: yup.number().required('Height is required').positive('Height must be positive'),
-  age: yup.number().required('Age is required').positive('Age must be positive').integer('Age must be a whole number'),
-  activityLevel: yup.string().required('Activity level is required'),
-  experienceLevel: yup.string().required('Experience level is required'),
-  healthConditions: yup.array().of(yup.string()).default([]),
-  availableEquipment: yup.array().of(yup.string()).default([]),
-  preferredWorkoutTimes: yup.array().of(yup.string()).default([]),
-  workoutDuration: yup.number().required('Workout duration is required').positive('Duration must be positive')
-});
-
 const FitnessAssessment: React.FC<FitnessAssessmentProps> = ({ onComplete, onBack }) => {
-  const { control, handleSubmit, formState: { errors }, watch, setValue } = useForm<FitnessAssessmentFormData>({
-    resolver: yupResolver(schema),
+  const { control, handleSubmit, formState: { errors }, watch, setValue } = useForm<FitnessAssessmentType>({
     defaultValues: {
+      currentWeight: 0,
+      height: 0,
+      age: 0,
+      activityLevel: 'moderate',
+      experienceLevel: 'beginner',
       healthConditions: [],
       availableEquipment: [],
       preferredWorkoutTimes: [],
@@ -218,7 +193,7 @@ const FitnessAssessment: React.FC<FitnessAssessmentProps> = ({ onComplete, onBac
     value: string, 
     selectedArray: string[], 
     setSelectedArray: (arr: string[]) => void,
-    fieldName: keyof FitnessAssessmentFormData
+    fieldName: keyof FitnessAssessmentType
   ) => {
     const newArray = selectedArray.includes(value)
       ? selectedArray.filter(item => item !== value)
@@ -228,11 +203,31 @@ const FitnessAssessment: React.FC<FitnessAssessmentProps> = ({ onComplete, onBac
     setValue(fieldName, newArray as any);
   };
 
-  const onSubmit = (data: FitnessAssessmentFormData) => {
+  const onSubmit = (data: FitnessAssessmentType) => {
+    // Basic validation
+    if (!data.currentWeight || data.currentWeight <= 0) {
+      alert('Please enter a valid current weight');
+      return;
+    }
+    if (!data.height || data.height <= 0) {
+      alert('Please enter a valid height');
+      return;
+    }
+    if (!data.age || data.age <= 0) {
+      alert('Please enter a valid age');
+      return;
+    }
+    if (!data.activityLevel) {
+      alert('Please select your activity level');
+      return;
+    }
+    if (!data.experienceLevel) {
+      alert('Please select your experience level');
+      return;
+    }
+
     const assessmentData: FitnessAssessmentType = {
       ...data,
-      activityLevel: data.activityLevel as FitnessAssessmentType['activityLevel'],
-      experienceLevel: data.experienceLevel as FitnessAssessmentType['experienceLevel'],
       healthConditions: selectedHealthConditions,
       availableEquipment: selectedEquipment,
       preferredWorkoutTimes: selectedWorkoutTimes
