@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { FitnessGoal } from '../types/user';
 
 interface GoalSettingProps {
@@ -293,27 +291,47 @@ const GOAL_TYPES = [
   }
 ];
 
-const schema = yup.object().shape({
-  type: yup.string().required('Goal type is required'),
-  target: yup.number().required('Target is required').positive('Target must be positive'),
-  unit: yup.string().required('Unit is required'),
-  deadline: yup.string().required('Deadline is required'),
-  description: yup.string().required('Description is required').min(10, 'Description must be at least 10 characters')
-});
-
 const GoalSetting: React.FC<GoalSettingProps> = ({ onComplete, onBack }) => {
   const [selectedGoalType, setSelectedGoalType] = useState<FitnessGoal['type'] | null>(null);
   const [currentGoals, setCurrentGoals] = useState<FitnessGoal[]>([]);
   const [showForm, setShowForm] = useState(false);
 
   const { control, handleSubmit, formState: { errors }, reset, watch } = useForm<GoalFormData>({
-    resolver: yupResolver(schema)
+    defaultValues: {
+      type: 'strength',
+      target: 0,
+      unit: '',
+      deadline: '',
+      description: ''
+    }
   });
 
   const selectedType = watch('type');
   const availableUnits = GOAL_TYPES.find(gt => gt.type === selectedType)?.units || [];
 
   const onSubmit = (data: GoalFormData) => {
+    // Basic validation
+    if (!data.type) {
+      alert('Please select a goal type');
+      return;
+    }
+    if (!data.target || data.target <= 0) {
+      alert('Please enter a valid target amount');
+      return;
+    }
+    if (!data.unit) {
+      alert('Please select a unit');
+      return;
+    }
+    if (!data.deadline) {
+      alert('Please select a deadline');
+      return;
+    }
+    if (!data.description || data.description.length < 10) {
+      alert('Please enter a description (at least 10 characters)');
+      return;
+    }
+
     const newGoal: FitnessGoal = {
       id: Date.now().toString(),
       type: data.type,
