@@ -391,7 +391,7 @@ const GoalSetting: React.FC<GoalSettingProps> = ({ onComplete, onBack }) => {
                     {GOAL_TYPES.find(gt => gt.type === goal.type)?.icon} {goal.description}
                   </GoalTarget>
                   <div>Target: {goal.target} {goal.unit}</div>
-                  <GoalDeadline>Deadline: {formatDeadline(goal.deadline)}</GoalDeadline>
+                  <GoalDeadline>Deadline: {goal.deadline ? formatDeadline(goal.deadline) : 'No deadline set'}</GoalDeadline>
                 </GoalInfo>
                 <RemoveButton onClick={() => removeGoal(goal.id)}>
                   Remove
