@@ -501,7 +501,7 @@ export const EXERCISE_DATABASE: Exercise[] = [
     baseXpValue: 15,
     description: 'Self-myofascial release technique that helps reduce muscle tension and improve recovery.',
     benefits: ['Reduces muscle tension', 'Improves flexibility', 'Enhances recovery', 'Increases blood flow'],
-    primaryMuscles: ['varies'],
+    primaryMuscles: ['full_body'],
     secondaryMuscles: ['core'],
     formSteps: [
       { stepNumber: 1, instruction: 'Position body on foam roller targeting specific muscle group', tip: 'Start with lighter pressure and gradually increase' },
@@ -551,8 +551,8 @@ export const EXERCISE_DATABASE: Exercise[] = [
     baseXpValue: 20,
     description: 'Mental training practice that develops awareness, focus, and emotional regulation.',
     benefits: ['Reduces stress and anxiety', 'Improves focus and concentration', 'Enhances emotional regulation', 'Promotes better sleep'],
-    primaryMuscles: ['none'],
-    secondaryMuscles: ['none'],
+    primaryMuscles: ['core'],
+    secondaryMuscles: [],
     formSteps: [
       { stepNumber: 1, instruction: 'Find comfortable seated position with spine straight', tip: 'Use cushion or chair for comfort' },
       { stepNumber: 2, instruction: 'Close eyes or soften gaze downward', commonMistake: 'Trying to force thoughts away' },
@@ -648,7 +648,7 @@ export const ADDITIONAL_EXERCISES: Exercise[] = [
     description: 'Builds powerful shoulders and core stability. The ultimate test of overhead strength.',
     benefits: ['Builds shoulder strength', 'Improves core stability', 'Enhances overhead mobility', 'Develops functional pressing power'],
     primaryMuscles: ['shoulders'],
-    secondaryMuscles: ['triceps', 'core', 'upper_back'],
+    secondaryMuscles: ['triceps', 'core', 'back'],
     formSteps: [
       { stepNumber: 1, instruction: 'Stand with feet hip-width apart, bar at shoulder level', tip: 'Keep core tight throughout movement' },
       { stepNumber: 2, instruction: 'Grip bar just outside shoulders', commonMistake: 'Grip too wide or too narrow' },
