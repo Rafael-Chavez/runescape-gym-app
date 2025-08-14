@@ -55,15 +55,15 @@ const StepItem = styled.div<{ isActive: boolean; isCompleted: boolean }>`
   transition: all 0.3s ease;
 `;
 
-const StepNumber = styled.span`
+const StepNumber = styled.span<{ isActive: boolean; isCompleted: boolean }>`
   background: ${props => 
     props.isActive ? '#ffd700' : 
     props.isCompleted ? '#32cd32' : 
     '#8b4513'
-  } as any;
+  };
   color: ${props => 
     props.isActive || props.isCompleted ? '#000' : '#f4e4bc'
-  } as any;
+  };
   border-radius: 50%;
   width: 24px;
   height: 24px;
