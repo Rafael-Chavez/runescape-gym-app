@@ -352,7 +352,7 @@ export const EXERCISE_DATABASE: Exercise[] = [
     baseXpValue: 15,
     description: 'A fundamental balance exercise that improves proprioception and ankle stability.',
     benefits: ['Improves balance and coordination', 'Strengthens ankles', 'Enhances proprioception', 'Prevents falls'],
-    primaryMuscles: ['calves', 'ankles'],
+    primaryMuscles: ['calves'],
     secondaryMuscles: ['core', 'glutes'],
     formSteps: [
       { stepNumber: 1, instruction: 'Stand tall with feet hip-width apart', tip: 'Find a focal point to help with balance' },
@@ -401,7 +401,7 @@ export const EXERCISE_DATABASE: Exercise[] = [
     baseXpValue: 30,
     description: 'Quick footwork drills that improve coordination, agility, and neuromuscular control.',
     benefits: ['Improves foot speed', 'Enhances coordination', 'Builds agility', 'Develops neuromuscular control'],
-    primaryMuscles: ['calves', 'ankles'],
+    primaryMuscles: ['calves'],
     secondaryMuscles: ['core', 'legs'],
     formSteps: [
       { stepNumber: 1, instruction: 'Stand at one end of agility ladder', tip: 'Start with basic two-feet-in-each-box pattern' },

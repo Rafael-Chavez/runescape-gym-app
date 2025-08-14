@@ -132,8 +132,8 @@ export const ADDITIONAL_EXERCISES_BATCH_2: Exercise[] = [
     baseXpValue: 25,
     description: 'Deep hip opener that stretches hip flexors, glutes, and outer thighs.',
     benefits: ['Opens tight hips', 'Stretches hip flexors', 'Releases tension in glutes', 'Improves hip mobility'],
-    primaryMuscles: ['glutes', 'hips'],
-    secondaryMuscles: ['hip_flexors', 'thighs'],
+    primaryMuscles: ['glutes'],
+    secondaryMuscles: ['hamstrings', 'quadriceps'],
     formSteps: [
       { stepNumber: 1, instruction: 'Start in downward dog position', tip: 'Begin from a familiar pose' },
       { stepNumber: 2, instruction: 'Bring right knee toward right wrist', commonMistake: 'Forcing knee too close to wrist' },
@@ -174,7 +174,7 @@ export const ADDITIONAL_EXERCISES_BATCH_2: Exercise[] = [
     description: 'Classic yoga balance pose that improves stability and focus.',
     benefits: ['Improves balance', 'Strengthens standing leg', 'Enhances focus', 'Calms the mind'],
     primaryMuscles: ['calves', 'core'],
-    secondaryMuscles: ['glutes', 'ankles'],
+    secondaryMuscles: ['glutes'],
     formSteps: [
       { stepNumber: 1, instruction: 'Stand tall with feet hip-width apart', tip: 'Find a focal point to help with balance' },
       { stepNumber: 2, instruction: 'Shift weight to left foot', commonMistake: 'Not fully committing weight to standing leg' },
