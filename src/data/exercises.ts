@@ -1,4 +1,5 @@
 import { Exercise, ExerciseCategory, DifficultyLevel, EquipmentType, MuscleGroup } from '../types/exercise';
+import { ALL_ADDITIONAL_EXERCISES } from './additionalExercises';
 
 export const EXERCISE_DATABASE: Exercise[] = [
   // STRENGTH SKILL EXERCISES
@@ -687,9 +688,6 @@ export const ADDITIONAL_EXERCISES: Exercise[] = [
     lastUpdated: new Date('2025-01-01')
   }
 ];
-
-// Import additional exercises
-import { ALL_ADDITIONAL_EXERCISES } from './additionalExercises';
 
 // Combine all exercises
 export const ALL_EXERCISES = [...EXERCISE_DATABASE, ...ADDITIONAL_EXERCISES, ...ALL_ADDITIONAL_EXERCISES];
