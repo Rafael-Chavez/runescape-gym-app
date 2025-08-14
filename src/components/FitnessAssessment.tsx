@@ -156,14 +156,14 @@ const ActionButton = styled.button`
 
 const schema = yup.object().shape({
   currentWeight: yup.number().required('Current weight is required').positive('Weight must be positive'),
-  targetWeight: yup.number().positive('Target weight must be positive').nullable(),
+  targetWeight: yup.number().positive('Target weight must be positive').optional(),
   height: yup.number().required('Height is required').positive('Height must be positive'),
   age: yup.number().required('Age is required').positive('Age must be positive').integer('Age must be a whole number'),
   activityLevel: yup.string().required('Activity level is required'),
   experienceLevel: yup.string().required('Experience level is required'),
-  healthConditions: yup.array().of(yup.string()),
-  availableEquipment: yup.array().of(yup.string()),
-  preferredWorkoutTimes: yup.array().of(yup.string()),
+  healthConditions: yup.array().of(yup.string()).default([]),
+  availableEquipment: yup.array().of(yup.string()).default([]),
+  preferredWorkoutTimes: yup.array().of(yup.string()).default([]),
   workoutDuration: yup.number().required('Workout duration is required').positive('Duration must be positive')
 });
 
